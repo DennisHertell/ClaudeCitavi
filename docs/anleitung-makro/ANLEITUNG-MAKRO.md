@@ -103,8 +103,8 @@ Auf **Ausführen (9)** klicken oder **F5** drücken.
 
 ### Bestätigen
 
-Die Meldung „ClaudeCitavi Bridge gestartet (Port 8765)“ mit **OK (10)** schließen. Den Makro Editor kannst du
-minimieren. Lass ihn geöffnet, bis du mit Citavi fertig bist.
+Die Meldung „ClaudeCitavi Bridge gestartet (Port 8765)“ mit **OK (10)** schließen. Den Makro Editor kannst du danach
+schließen. Die Verbindung läuft weiter, bis du Citavi beendest.
 
 ![Die Meldung nach dem Start.](img/07_meldung.png)
 
