@@ -139,7 +139,7 @@ Wissenselemente: `groups[]`, `relevance`.
 
 | Methode | Schreibt | Parameter |
 |---|---|---|
-| `projects.create` | ✔ | `name`, `type` (`cloud`/`local`, Standard `cloud`). Ohne offenes Projekt nutzbar |
+| `projects.create` | ✔ | `name`, `type` (`cloud`/`local`, Standard `cloud`), `folder` (nur `local`: übergeordneter Ordner, Standard ist Citavis Projektordner, das Projekt bekommt einen eigenen Unterordner). Ohne offenes Projekt nutzbar |
 | `pdf.text` | | `referenceId` oder `locationId`, `fromPage=1`, `toPage=0`, `maxChars`. Seiten mit Text und, falls im PDF hinterlegt, gedruckter Seitenzahl |
 | `links.list` / `links.create` / `links.delete` ⚠ | / ✔ / ✔ | `referenceId` / `sourceId`, `targetId`, `relation?`, `notes?`, `pages?` / `linkIds[]` |
 | `organizer.list` | | `path` |

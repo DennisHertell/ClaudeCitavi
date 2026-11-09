@@ -254,6 +254,18 @@ async def test_open_project_selects_it(fake_bridge):
     assert fake_bridge.opened == ["Dissertation"]
 
 
+async def test_create_local_project_passes_folder(fake_bridge):
+    args = {"name": "Lokal", "project_type": "local", "folder": r"D:\Projekte"}
+    result = structured(await server.mcp.call_tool("create_project", args))
+    assert result["selectedProject"] == "Lokal"
+    assert ("projects.create", {"name": "Lokal", "type": "local", "folder": r"D:\Projekte"}) in fake_bridge.calls
+
+
+async def test_create_cloud_project_sends_no_folder(fake_bridge):
+    await server.mcp.call_tool("create_project", {"name": "Wolke"})
+    assert ("projects.create", {"name": "Wolke", "type": "cloud"}) in fake_bridge.calls
+
+
 async def test_select_known_but_closed_project_opens_it(fake_bridge):
     result = structured(await server.mcp.call_tool("select_project", {"name": "dissertation"}))
     assert result["selectedProject"] == "Dissertation"

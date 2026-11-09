@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -134,6 +135,8 @@ namespace ClaudeCitavi.Bridge
             optionsType.GetProperty("ProjectName").SetValue(options, name, null);
             optionsType.GetProperty("ProjectType").SetValue(options, Enum.Parse(projectTypeEnum, kind == "local" ? "DesktopSQLite" : "DesktopCloud"), null);
             optionsType.GetProperty("AddToKnownProjects").SetValue(options, true, null);
+            if (kind == "local")
+                optionsType.GetProperty("ConnectionString").SetValue(options, LocalProjectFile(programType, name, P.Str(p, "folder")), null);
 
             var owner = (Cv.StaticValue(programType, "StartForm") as Form) ?? Ui.Anchor() as Form;
             var method = programType.GetMethods().FirstOrDefault(m => m.Name == "AddProjectAsync" && m.IsStatic &&
@@ -156,6 +159,32 @@ namespace ClaudeCitavi.Bridge
                 }
                 throw new BridgeException("timeout", $"Project '{name}' was not opened within {timeout.TotalSeconds:0} s (dialog in Citavi?).", 504);
             });
+        }
+
+        /// <summary>
+        /// Local (SQLite) projects need the path of the new .ctv6 file as connection string. Like Citavi's own dialog,
+        /// the project gets its own folder below Citavi's projects folder (or below <paramref name="folder"/>).
+        /// </summary>
+        private static string LocalProjectFile(Type programType, string name, string folder)
+        {
+            var engine = Cv.StaticValue(programType, "Engine")
+                         ?? throw new BridgeException("api_mismatch", "Program.Engine not available.", 500);
+            if (string.IsNullOrWhiteSpace(folder))
+            {
+                var config = Cv.Get(engine, "DesktopEngineConfiguration");
+                var projectsFolder = Cv.EnumValue(Cv.RequireType("SwissAcademic.Citavi.CitaviFolder"), new[] { "Projects" });
+                folder = Cv.Call(config, "GetFolderPath", projectsFolder, null) as string;
+            }
+            if (string.IsNullOrWhiteSpace(folder))
+                throw new BridgeException("api_mismatch", "Citavi's projects folder could not be determined. Pass 'folder'.", 500);
+            Directory.CreateDirectory(folder);
+
+            var created = Cv.Call(Cv.Get(engine, "Projects"), "CreateProjectFolders", new DirectoryInfo(folder), name, false) as string;
+            if (string.IsNullOrWhiteSpace(created))
+                throw new BridgeException("api_mismatch", "ProjectCollection.CreateProjectFolders returned no path.", 500);
+            var file = created.EndsWith(".ctv6", StringComparison.OrdinalIgnoreCase) ? created : Path.Combine(created, name + ".ctv6");
+            BridgeLog.Write($"Local project file: {file}");
+            return file;
         }
     }
 
