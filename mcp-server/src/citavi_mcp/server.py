@@ -60,7 +60,7 @@ def _rules_text() -> str:
 
 INSTRUCTIONS = INSTRUCTIONS + "\n" + _rules_text()
 
-mcp = MCPServer("citavi", instructions=INSTRUCTIONS, version="0.4.0")
+mcp = MCPServer("citavi", instructions=INSTRUCTIONS, version="0.4.1")
 bridge = BridgeClient()
 
 READ = ToolAnnotations(read_only_hint=True, open_world_hint=False)

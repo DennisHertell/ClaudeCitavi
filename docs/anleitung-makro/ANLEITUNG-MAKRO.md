@@ -8,7 +8,7 @@ danach die Verbindung mit wenigen Klicks.
 ::: hinweis
 **Bei jeder Citavi-Sitzung neu starten.** Die Verbindung läuft nur, solange Citavi offen ist. Nach jedem Neustart von
 Citavi startest du das Makro wieder (Teil 2, etwa 1 Minute). Soll die Verbindung dauerhaft von selbst starten, kann die
-IT deiner Einrichtung das Add-on einmalig installieren (Weg B, eigene Anleitung im Paket `ClaudeCitavi-0.4.0-AddOn.zip`).
+IT deiner Einrichtung das Add-on einmalig installieren (Weg B, eigene Anleitung im Paket `ClaudeCitavi-0.4.1-AddOn.zip`).
 Kläre vor der Nutzung auf einem Dienstrechner, ob Citavi-Makros und Claude nach den Regeln deiner Einrichtung genutzt
 werden dürfen.
 :::
@@ -17,7 +17,7 @@ werden dürfen.
 
 - Citavi 6 auf deinem Rechner und ein Citavi Projekt
 - Claude Desktop mit deinem Konto
-- das Paket `ClaudeCitavi-0.4.0-Makro.zip` aus den [Releases](https://github.com/DennisHertell/ClaudeCitavi/releases)
+- das Paket `ClaudeCitavi-0.4.1-Makro.zip` aus den [Releases](https://github.com/DennisHertell/ClaudeCitavi/releases)
 - Python 3.12, das du in Schritt A installierst, falls es noch fehlt
 
 ## Teil 1: einmal einrichten (etwa 10 Minuten)

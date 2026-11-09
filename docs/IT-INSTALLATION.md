@@ -9,10 +9,10 @@ in Citavi klicken. Dafür braucht es einmalig Administratorrechte. Citavi 6 läd
 
 ## Bezugsquelle und Prüfung
 
-- Paket: `ClaudeCitavi-<Version>-AddOn.zip`, aktuell Version 0.4.0. Bezug über die Releases des öffentlichen GitHub
+- Paket: `ClaudeCitavi-<Version>-AddOn.zip`, aktuell Version 0.4.1. Bezug über die Releases des öffentlichen GitHub
   Repositorys [DennisHertell/ClaudeCitavi](https://github.com/DennisHertell/ClaudeCitavi/releases).
 - Die SHA256 Prüfsummen der Pakete stehen in den Release Notes auf GitHub, also getrennt vom Paket. Vor der Installation
-  vergleichen: `Get-FileHash .\ClaudeCitavi-0.4.0-AddOn.zip`.
+  vergleichen: `Get-FileHash .\ClaudeCitavi-0.4.1-AddOn.zip`.
 - Alle Python Pakete im Ordner `wheelhouse` sind mit ihrer SHA256 Prüfsumme in `wheelhouse\requirements.txt` verzeichnet.
   Die Installation bricht ab, wenn eine Datei abweicht.
 - Der vollständige Quelltext des Add-ons und des MCP Servers liegt dem Paket als `source.zip` bei. Die DLL lässt sich

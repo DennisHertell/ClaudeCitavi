@@ -6,9 +6,12 @@ Alle nennenswerten Änderungen an diesem Projekt. Format nach
 
 ## [Unreleased]
 
+## [0.4.1] - 2026-11-09
+
 ### Changed
 - Installationswege neutral beschrieben: Weg A Add-on auf dem eigenen Rechner, Weg B Add-on auf dem Dienstrechner (Installation
   durch die IT), Weg C Citavi-Makro auf dem Dienstrechner. Für Dienstrechner wird Weg B empfohlen, die IT-Anleitung beschreibt Weg C offen.
+- Makro: Hinweis bei fehlender DLL verweist auf Einrichten aus dem Makro-Paket. Neuer Screenshot des Makro-Editors.
 - Einrichtung für Nutzer über `einrichten.py` (Doppelklick auf `Einrichten.cmd` bzw. `Claude-verbinden.cmd`) statt PowerShell-Skripten.
   `makro-einrichten.ps1` und `nutzer-einrichten.ps1` entfallen.
 
