@@ -7,8 +7,8 @@ namespace ClaudeCitavi.Bridge
 {
     /// <summary>
     /// Start the bridge from a Citavi macro instead of the AddOns folder.
-    /// Needed where Citavi's AddOns folder (under Program Files) is not writable
-    /// without admin rights. The macro (bridge/macro/StartClaudeBridge.cs) loads this
+    /// Way C: used where the add-on is not installed in Citavi's AddOns folder (installing
+    /// there is done by an administrator, way B). The macro (bridge/macro/StartClaudeBridge.cs) loads this
     /// DLL with Assembly.LoadFrom and calls Start() on Citavi's UI thread.
     /// </summary>
     public static class MacroEntry

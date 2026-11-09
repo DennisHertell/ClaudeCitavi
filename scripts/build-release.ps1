@@ -2,7 +2,7 @@
 .SYNOPSIS
   Builds both release packages:
     ClaudeCitavi-<version>-AddOn.zip  ways A and B: add-on in Citavi's AddOns folder (admin once), it-install.ps1
-    ClaudeCitavi-<version>-Makro.zip  way C: no admin rights, bridge started by a Citavi macro, makro-einrichten.ps1
+    ClaudeCitavi-<version>-Makro.zip  way C: bridge started by a Citavi macro in the user's Citavi session, Einrichten.cmd
   Both contain the add-on DLL with SHA256, an offline wheelhouse of the MCP server (Python 3.12, Windows x64)
   and the documentation.
 
@@ -37,7 +37,7 @@ $req = foreach ($w in Get-ChildItem "$common\wheelhouse" -Filter *.whl | Sort-Ob
     "{0}=={1} --hash=sha256:{2}" -f $parts[0], $parts[1], (Get-FileHash $w.FullName -Algorithm SHA256).Hash.ToLower()
 }
 $req | Set-Content "$common\wheelhouse\requirements.txt" -Encoding ASCII
-Copy-Item (Join-Path $repo 'scripts\nutzer-einrichten.ps1') $common
+Copy-Item (Join-Path $repo 'scripts\einrichten.py') $common
 Copy-Item (Join-Path $repo 'docs\ZITIERREGELN.md'), (Join-Path $repo 'docs\NUTZUNG.md') "$common\docs\"
 # Source of exactly this build, so IT can review it or rebuild the DLL.
 Push-Location $repo
@@ -58,8 +58,8 @@ function Pack($name, [string[]]$files, [string[]]$docs) {
     Write-Host "Paket: $zip"
 }
 
-Pack 'AddOn' @('scripts\it-install.ps1') @('docs\IT-INSTALLATION.md', 'docs\INSTALLATION.md')
-Pack 'Makro' @('scripts\Einrichten.cmd', 'scripts\makro-einrichten.ps1', 'bridge\macro\StartClaudeBridge.cs') @('docs\INSTALLATION.md')
+Pack 'AddOn' @('scripts\it-install.ps1', 'scripts\Claude-verbinden.cmd') @('docs\IT-INSTALLATION.md', 'docs\INSTALLATION.md')
+Pack 'Makro' @('scripts\Einrichten.cmd', 'bridge\macro\StartClaudeBridge.cs') @('docs\INSTALLATION.md')
 Remove-Item -Recurse -Force $common
 $sums = Get-ChildItem $OutDir -Filter "ClaudeCitavi-$version-*.zip" | ForEach-Object { "{0}  {1}" -f (Get-FileHash $_.FullName -Algorithm SHA256).Hash, $_.Name }
 $sums += "$hash  ClaudeCitavi.Bridge.dll"

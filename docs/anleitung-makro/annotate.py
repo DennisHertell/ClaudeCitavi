@@ -14,7 +14,7 @@ FONT = ImageFont.truetype("C:/Windows/Fonts/segoeuib.ttf", 18)
 
 MARKS = {
     "00_paket_ordner.png": [("blur", (300, 50, 362, 78), None), ("blur", (34, 208, 300, 236), None),
-                            ("box", (328, 225, 565, 247), "1")],
+                            ("blur", (300, 536, 1000, 560), None), ("box", (328, 253, 565, 275), "1")],
     "01_startfenster.png": [("blur", (52, 282, 515, 552), None), ("box", (50, 244, 300, 271), "2")],
     "02_extras_menu.png": [("crop", (0, 0, 1118, 720), None), ("box", (290, 32, 330, 53), "3"), ("box", (311, 177, 560, 200), "4")],
     "04_datei_menu.png": [("box", (9, 32, 50, 53), "5"), ("box", (11, 55, 203, 77), "6")],

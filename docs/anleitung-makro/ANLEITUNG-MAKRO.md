@@ -1,8 +1,17 @@
-# Citavi mit Claude steuern, ohne Adminrechte
+# Citavi mit Claude steuern über ein Citavi-Makro
 
 Mit ClaudeCitavi arbeitet Claude direkt in deinem Citavi. Claude legt Titel an, hängt PDFs an, liest Quellen und
-erfasst Wissenselemente mit Markierung im PDF. Diese Anleitung beschreibt den Weg ohne Adminrechte. Du richtest einmal
-alles ein und startest danach bei jedem Citavi Start die Verbindung mit wenigen Klicks.
+erfasst Wissenselemente mit Markierung im PDF. Diese Anleitung beschreibt Weg C: Die Verbindung startet über die
+Makro-Funktion von Citavi. Dafür wird nichts in Programmordnern installiert. Du richtest einmal alles ein und startest
+danach die Verbindung mit wenigen Klicks.
+
+::: hinweis
+**Bei jeder Citavi-Sitzung neu starten.** Die Verbindung läuft nur, solange Citavi offen ist. Nach jedem Neustart von
+Citavi startest du das Makro wieder (Teil 2, etwa 1 Minute). Soll die Verbindung dauerhaft von selbst starten, kann die
+IT deiner Einrichtung das Add-on einmalig installieren (Weg B, eigene Anleitung im Paket `ClaudeCitavi-0.4.0-AddOn.zip`).
+Kläre vor der Nutzung auf einem Dienstrechner, ob Citavi-Makros und Claude nach den Regeln deiner Einrichtung genutzt
+werden dürfen.
+:::
 
 ## Was du brauchst
 
@@ -17,29 +26,30 @@ alles ein und startest danach bei jedem Citavi Start die Verbindung mit wenigen 
 
 1. Auf [python.org/downloads](https://www.python.org/downloads/) den Installer für Python 3.12 (Windows, 64 Bit)
    herunterladen und starten.
-2. Im ersten Fenster den Haken bei **Use admin privileges when installing py.exe** entfernen. So braucht die
-   Installation keine Adminrechte.
+2. Im ersten Fenster den Haken bei **Use admin privileges when installing py.exe** entfernen. So installiert Python nur
+   für dein Benutzerkonto. Ist Python auf deinem Rechner schon vorhanden oder stellt die IT es bereit, entfällt Schritt A.
 3. **Install Now** klicken und warten, bis „Setup was successful“ erscheint.
 
 ### B. Paket entpacken und einrichten
 
 1. Das Paket mit Rechtsklick und **Alle extrahieren** entpacken, zum Beispiel in den Ordner Downloads.
-2. Im entpackten Ordner doppelt auf **Einrichten** klicken **(1)**.
+2. Im entpackten Ordner doppelt auf **Einrichten** klicken **(1)**, die Datei vom Typ *Windows-Befehlsskript*.
 
 ![Der entpackte Ordner. Doppelklick auf Einrichten.](img/00_paket_ordner.png)
 
 ::: hinweis
-Zeigt Windows „Der Computer wurde durch Windows geschützt“, auf **Weitere Informationen** und dann auf
-**Trotzdem ausführen** klicken. Die Datei startet nur das Einrichtungsskript aus dem Paket.
+`Einrichten` startet das Python-Programm `einrichten.py` aus dem Paket. Es legt alles in deinem Benutzerprofil ab und
+ändert keine Systemeinstellungen. Zeigt Windows einen Hinweis zur Herkunft der Datei, prüfe, dass das Paket aus den
+offiziellen Releases stammt und seine Prüfsumme stimmt. Im Zweifel frag die IT deiner Einrichtung.
 :::
 
 Ein schwarzes Fenster zeigt den Fortschritt. Am Ende steht:
 
 ```
-Test: Citavi starten, Projekt oeffnen, in Claude fragen: 'Pruefe die Verbindung zu Citavi.'
+Claude Desktop: eingetragen in ...\Claude\claude_desktop_config.json (Sicherung .bak). Claude Desktop bitte neu starten.
 
-Fertig. Nach jedem Citavi-Start einmal:
-  Citavi > Extras > Makro-Editor (Alt+F11) > Oeffnen: C:\Users\<Name>\AppData\Roaming\ClaudeCitavi\StartClaudeBridge.cs > Ausfuehren (F5)
+Fertig. Bei jeder Citavi-Sitzung einmal das Makro starten:
+  Citavi > Extras > Makro-Editor (Alt+F11) > Öffnen: C:\Users\<Name>\AppData\Roaming\ClaudeCitavi\StartClaudeBridge.cs > Ausführen (F5)
 
 Drücken Sie eine beliebige Taste . . .
 ```
@@ -50,9 +60,9 @@ Steht dort stattdessen eine rote Fehlermeldung, hilft die Tabelle am Ende dieser
 4. Claude Desktop ganz beenden, auch im Infobereich unten rechts neben der Uhr (Rechtsklick auf das Claude Symbol,
    **Beenden**), und neu starten.
 
-## Teil 2: bei jedem Citavi Start (etwa 1 Minute)
+## Teil 2: bei jeder Citavi-Sitzung (etwa 1 Minute)
 
-Die Verbindung läuft, solange Citavi offen ist. Nach jedem Neustart von Citavi startest du sie einmal neu.
+Die Verbindung läuft, solange Citavi offen ist. Nach jedem Neustart von Citavi startest du das Makro einmal neu.
 
 ### Projekt öffnen
 
@@ -123,7 +133,7 @@ Claude nur nach deiner ausdrücklichen Zustimmung.
 | Claude meldet „Citavi ist nicht erreichbar“ | Citavi wurde neu gestartet. Teil 2 noch einmal ausführen. |
 | Meldung „Kein Citavi-Projektfenster gefunden“ | Erst ein Projekt öffnen, dann das Makro ausführen. |
 | Meldung „ClaudeCitavi Bridge läuft bereits“ | Alles in Ordnung, die Verbindung steht schon. |
-| Das Einrichten meldet „Python 3.12 fehlt“ | Schritt A ausführen, danach **Einrichten** erneut doppelklicken. |
+| Das Einrichten meldet „Python 3.12 wurde nicht gefunden“ | Schritt A ausführen, danach **Einrichten** erneut doppelklicken. |
 | Claude kennt keine Citavi Werkzeuge | Claude Desktop ganz beenden, auch im Infobereich, und neu starten. |
 
 Bei anderen Fragen bitte ein [Issue](https://github.com/DennisHertell/ClaudeCitavi/issues) anlegen.

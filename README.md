@@ -57,13 +57,20 @@ Löschen und Zusammenführen verlangen `confirm=True` und laufen nur nach Zustim
 Es gibt drei Wege, ClaudeCitavi zu installieren. Alle drei bieten dieselben Funktionen. Die fertigen Pakete liegen unter
 [Releases](../../releases), Quelltext ist zum Installieren nicht nötig.
 
-| | Weg A: eigener Rechner | Weg B: Dienstrechner über die IT | Weg C: ohne Adminrechte |
+| | Weg A: Add-on auf dem eigenen Rechner | Weg B: Add-on auf dem Dienstrechner | Weg C: Citavi-Makro auf dem Dienstrechner |
 |---|---|---|---|
-| **Für wen** | privater Rechner oder Heimserver, du hast Adminrechte | Dienstrechner, die IT installiert einmalig | Dienstrechner, wenn die IT nicht installiert |
-| **Wie die Brücke startet** | als Citavi Add-on, automatisch mit Citavi | als Citavi Add-on, automatisch mit Citavi | über ein Citavi Makro, einmal je Citavi Start (Alt+F11, F5) |
-| **Adminrechte** | einmalig, du selbst | einmalig, die IT | keine |
+| **Wer wird gebraucht** | niemand, du installierst selbst mit deinen Adminrechten | die IT deiner Einrichtung für die einmalige Installation des Add-ons | niemand, du richtest es selbst ein |
+| **Start der Verbindung** | automatisch mit Citavi | automatisch mit Citavi | bei jeder Citavi-Sitzung neu über das Makro (Alt+F11, Datei öffnen, F5), etwa 1 Minute |
 | **Paket** | `ClaudeCitavi-<Version>-AddOn.zip` | `ClaudeCitavi-<Version>-AddOn.zip` | `ClaudeCitavi-<Version>-Makro.zip` |
-| **Anleitung** | [Weg A](docs/INSTALLATION.md#weg-a-eigener-rechner-mit-adminrechten) | [Anleitung für die IT](docs/IT-INSTALLATION.md) (als PDF im Paket) | [Bebilderte Anleitung](docs/anleitung-makro/ANLEITUNG-MAKRO.md) (als PDF im Paket) |
+| **Anleitung** | [Weg A](docs/INSTALLATION.md#weg-a-add-on-auf-dem-eigenen-rechner) | [Anleitung für die IT](docs/IT-INSTALLATION.md) (als PDF im Paket) | [Bebilderte Anleitung](docs/anleitung-makro/ANLEITUNG-MAKRO.md) (als PDF im Paket) |
+
+**Wichtig bei Weg C:** Die Verbindung läuft nur, solange Citavi offen ist. Nach jedem Neustart von Citavi muss das Makro
+wieder gestartet werden. Bei Weg A und B startet sie von selbst.
+
+Weg C nutzt die Makro-Funktion, die Citavi jedem Nutzer anbietet, und installiert nichts in Programmordnern. Er eignet
+sich zum Ausprobieren und für Rechner, auf denen das Add-on noch nicht installiert ist. Für den dauerhaften Einsatz auf
+Dienstrechnern ist Weg B gedacht, in Absprache mit der IT. Bitte vor der Nutzung auf einem Dienstrechner klären, ob
+Citavi-Makros und Claude nach den Regeln deiner Einrichtung genutzt werden dürfen.
 
 Für alle Wege nötig: Windows, Citavi 6 Desktop, Python 3.12 und Claude Desktop oder Claude Code. Danach Citavi starten
 und in Claude fragen: *„Prüfe die Verbindung zu Citavi.“*

@@ -1,9 +1,7 @@
-// Citavi macro: starts the ClaudeCitavi Bridge in the running Citavi.
-// Use this when the add-on cannot be installed into Citavi's AddOns folder
-// (no admin rights). Run once after every Citavi start:
-//   Citavi > Extras > Makro-Editor (Alt+F11) > open this file > Ausführen (F5)
+// Citavi-Makro: startet die ClaudeCitavi-Bridge in dieser Citavi-Sitzung (Weg C, Makro-Funktion von Citavi).
+// Bei jeder Citavi-Sitzung einmal ausführen: Extras > Makro-Editor (Alt+F11) > Datei öffnen > Ausführen (F5).
 //
-// The install script copies ClaudeCitavi.Bridge.dll to %APPDATA%\ClaudeCitavi.
+// Einrichten.cmd (einrichten.py) legt ClaudeCitavi.Bridge.dll und dieses Makro in %APPDATA%\ClaudeCitavi ab.
 
 using System;
 using System.IO;

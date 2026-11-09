@@ -28,7 +28,7 @@ namespace ClaudeCitavi.Bridge
             Bootstrap.Start("project window loaded");
         }
 
-        /// <summary>Kept for the macro entry point (machines without admin rights).</summary>
+        /// <summary>Entry for the Citavi macro (way C), used when the add-on is not in the AddOns folder.</summary>
         internal static string Attach(MainForm mainForm, bool showErrors)
         {
             Bootstrap.Track(mainForm);

@@ -8,7 +8,7 @@
   powershell -ExecutionPolicy Bypass -File scripts\install.ps1
 
 .EXAMPLE
-  # Without admin rights: start the bridge via a Citavi macro instead of the AddOns folder
+  # Way C: start the bridge via a Citavi macro instead of the AddOns folder
   powershell -ExecutionPolicy Bypass -File scripts\install.ps1 -Macro
 
 .EXAMPLE
@@ -51,11 +51,11 @@ if (-not $SkipAddon) {
     if (Get-Process -Name Citavi -ErrorAction SilentlyContinue) {
         throw "Citavi laeuft noch. Bitte Citavi schliessen und das Skript erneut starten."
     }
-    # .NET may be installed per user (dotnet-install.ps1, no admin rights) and not be on PATH.
+    # .NET may be installed per user (dotnet-install.ps1) and not be on PATH.
     $userDotnet = Join-Path $env:LOCALAPPDATA 'Microsoft\dotnet'
     if (Test-Path (Join-Path $userDotnet 'dotnet.exe')) { $env:PATH = "$userDotnet;$env:PATH" }
     if (-not (Get-Command dotnet -ErrorAction SilentlyContinue)) {
-        throw ".NET SDK fehlt. Siehe docs/INSTALLATION.md (Installation ohne Administratorrechte moeglich)."
+        throw ".NET SDK fehlt. Siehe docs/ENTWICKLUNG.md."
     }
 
     Step "Baue Citavi-Add-on"
@@ -66,9 +66,9 @@ if (-not $SkipAddon) {
 
     $dll = Join-Path $out 'ClaudeCitavi.Bridge.dll'
     if ($Macro) {
-        # No admin rights: DLL + macro go to the user profile; the macro starts the bridge.
+        # Way C: DLL + macro go to the user profile; the macro starts the bridge.
         $target = Join-Path $env:APPDATA 'ClaudeCitavi'
-        Step "Kopiere Bridge und Start-Makro nach $target (keine Administratorrechte noetig)"
+        Step "Kopiere Bridge und Start-Makro nach $target (Benutzerprofil)"
         New-Item -ItemType Directory -Force -Path $target | Out-Null
         Copy-Item -Force $dll $target
         Copy-Item -Force (Join-Path $repo 'bridge\macro\StartClaudeBridge.cs') $target
@@ -79,7 +79,7 @@ if (-not $SkipAddon) {
         $copy = "New-Item -ItemType Directory -Force -Path '$addonsDir' | Out-Null; Copy-Item -Force '$dll' '$addonsDir'"
         Start-Process powershell -Verb RunAs -Wait -ArgumentList "-NoProfile", "-Command", $copy
         if (-not (Test-Path (Join-Path $addonsDir 'ClaudeCitavi.Bridge.dll'))) {
-            throw "Kopieren fehlgeschlagen. Ohne Administratorrechte: Skript mit -Macro starten."
+            throw "Kopieren in den AddOns-Ordner fehlgeschlagen (Administratorrechte noetig). Alternative: Weg C mit -Macro."
         }
     }
 }
