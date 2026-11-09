@@ -24,7 +24,7 @@ in Citavi klicken. Dafür braucht es einmalig Administratorrechte. Citavi 6 läd
 |---|---|---|
 | Citavi Add-on `ClaudeCitavi.Bridge.dll` | `C:\Program Files (x86)\Citavi 6\AddOns\` | Administrator, einmalig |
 | MCP Server (Python) in eigener Umgebung | `C:\Program Files\ClaudeCitavi\mcp-server\` | Administrator, einmalig |
-| Einrichtungsskript für Nutzer | `C:\Program Files\ClaudeCitavi\nutzer-einrichten.ps1` | Administrator, einmalig |
+| Einrichtung für Nutzer (`einrichten.py`, `Claude-verbinden.cmd`) | `C:\Program Files\ClaudeCitavi\` | Administrator, einmalig |
 | Eintrag in Claude Desktop, mit Sicherung `.bak` | `%APPDATA%\Claude\claude_desktop_config.json` | Nutzer |
 | Eintrag in Claude Code, falls installiert | `%USERPROFILE%\.claude.json` | Nutzer |
 | Einstellungen mit Port und Zugangsschlüssel | `%APPDATA%\ClaudeCitavi\bridge.json`, legt das Add-on beim ersten Start an | Nutzer |
@@ -47,10 +47,9 @@ Systemeinstellungen.
 
 1. Citavi schließen.
 2. Prüfsumme des Pakets mit den Release Notes vergleichen, dann das Paket entpacken.
-3. PowerShell als Administrator öffnen, in den entpackten Ordner wechseln und ausführen:
-   ```powershell
-   powershell -ExecutionPolicy Bypass -File .\it-install.ps1
-   ```
+3. PowerShell als Administrator öffnen, in den entpackten Ordner wechseln und `.\it-install.ps1` ausführen. Das Skript ist
+   nicht signiert. Wie es nach der Ausführungsrichtlinie der Einrichtung zugelassen wird, entscheidet die IT, zum Beispiel
+   mit `powershell -ExecutionPolicy Bypass -File .\it-install.ps1` für diesen einen Aufruf.
    Das Skript prüft die Prüfsumme der DLL, kopiert sie in den AddOns Ordner von Citavi, prüft Python 3.12 64 Bit und
    installiert den MCP Server in eine eigene Python Umgebung. Alle Pakete kommen aus dem Ordner `wheelhouse` und werden
    gegen ihre Prüfsummen geprüft. Der Rechner braucht dafür keinen Internetzugang. Andere Citavi Pfade mit
@@ -64,17 +63,13 @@ New-Item -ItemType Directory -Force "C:\Program Files (x86)\Citavi 6\AddOns"
 Copy-Item .\AddOn\ClaudeCitavi.Bridge.dll "C:\Program Files (x86)\Citavi 6\AddOns\"
 py -3.12 -m venv "C:\Program Files\ClaudeCitavi\mcp-server\.venv"
 & "C:\Program Files\ClaudeCitavi\mcp-server\.venv\Scripts\python.exe" -m pip install --no-index --find-links .\wheelhouse --require-hashes -r .\wheelhouse\requirements.txt
-Copy-Item .\nutzer-einrichten.ps1 "C:\Program Files\ClaudeCitavi\"
+Copy-Item .\einrichten.py, .\Claude-verbinden.cmd "C:\Program Files\ClaudeCitavi\"
 ```
 
-## Einrichtung durch den Nutzer (ohne Administratorrechte)
+## Einrichtung durch den Nutzer
 
-```powershell
-powershell -ExecutionPolicy Bypass -File "C:\Program Files\ClaudeCitavi\nutzer-einrichten.ps1"
-```
-
-Das Skript trägt den MCP Server in die Konfiguration von Claude Desktop ein und, falls installiert, in Claude Code.
-Danach Claude neu starten, Citavi starten und in Claude fragen: „Prüfe die Verbindung zu Citavi.“
+Der Nutzer klickt einmal doppelt auf `C:\Program Files\ClaudeCitavi\Claude-verbinden.cmd`. Das startet `einrichten.py`
+mit Python 3.12. Es ändert nur die eigene Claude Konfiguration des Nutzers und trägt den MCP Server in Claude Desktop ein und, falls installiert, in Claude Code. Danach Claude neu starten, Citavi starten und in Claude fragen: „Prüfe die Verbindung zu Citavi.“
 
 ## Sicherheit
 
@@ -94,6 +89,14 @@ Danach Claude neu starten, Citavi starten und in Claude fragen: „Prüfe die Ve
   im Add-on umgesetzt, nicht nur im Dialog mit Claude.
 - Die DLL ist nicht signiert. Falls eine Schutzsoftware anschlägt, kann die IT sie über die Prüfsumme oder den Pfad
   freigeben.
+
+## Verhältnis zu Weg C (Citavi-Makro)
+
+Das Projekt beschreibt einen zweiten Weg für Rechner, auf denen das Add-on nicht installiert ist: Der Nutzer startet
+die Bridge in seiner Citavi-Sitzung über die Makro-Funktion von Citavi. Dabei wird nichts in Programmordnern
+installiert, die Bridge läuft mit denselben Sicherheitsmerkmalen wie oben und muss bei jeder Citavi-Sitzung neu
+gestartet werden. Für den dauerhaften Einsatz auf Dienstrechnern empfiehlt das Projekt diese Installation durch die IT.
+Bitte teilen Sie Ihren Nutzern mit, ob Citavi-Makros und Claude in Ihrer Einrichtung genutzt werden dürfen.
 
 ## Datenschutz
 

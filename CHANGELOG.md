@@ -6,6 +6,12 @@ Alle nennenswerten Änderungen an diesem Projekt. Format nach
 
 ## [Unreleased]
 
+### Changed
+- Installationswege neutral beschrieben: Weg A Add-on auf dem eigenen Rechner, Weg B Add-on auf dem Dienstrechner (Installation
+  durch die IT), Weg C Citavi-Makro auf dem Dienstrechner. Für Dienstrechner wird Weg B empfohlen, die IT-Anleitung beschreibt Weg C offen.
+- Einrichtung für Nutzer über `einrichten.py` (Doppelklick auf `Einrichten.cmd` bzw. `Claude-verbinden.cmd`) statt PowerShell-Skripten.
+  `makro-einrichten.ps1` und `nutzer-einrichten.ps1` entfallen.
+
 ## [0.4.0] - 2026-11-09
 
 Erste öffentliche Fassung. Die Entwicklungsgeschichte bis hierher steht in den Einträgen unten.
@@ -15,8 +21,8 @@ Erste öffentliche Fassung. Die Entwicklungsgeschichte bis hierher steht in den 
   Anthropic verbunden ist.
 
 ### Added (v0.4, auf Citavi 6.20 geprüft)
-- Drei Installationswege mit fertigen Paketen: eigener Rechner, Installation durch die IT (Anleitung als PDF),
-  ohne Adminrechte über ein Citavi-Makro (bebilderte Anleitung als PDF, `Einrichten.cmd` zum Doppelklicken).
+- Drei Installationswege mit fertigen Paketen: Add-on auf dem eigenen Rechner, Add-on auf dem Dienstrechner über die IT
+  (Anleitung als PDF), Citavi-Makro auf dem Dienstrechner (bebilderte Anleitung als PDF).
   Offline-Installation, SHA256 für DLL und alle Python-Pakete, Quelltext liegt bei.
 - Zitierregeln als verbindliche Datei [docs/ZITIERREGELN.md](docs/ZITIERREGELN.md), vom MCP-Server in seine Anweisungen
   geladen: nur Haupttext, kein Abstract, keine mit fremder Quelle belegten Sätze, Primärquelle suchen, gedruckte
@@ -87,8 +93,8 @@ Erste öffentliche Fassung. Die Entwicklungsgeschichte bis hierher steht in den 
   per `EntityLink` (`PdfKnowledgeItemIndication`) mit dem Wissenselement verknüpfen. Bridge `pdf.findText`,
   `pdf.highlight`; MCP `create_knowledge_item(highlight_in_pdf=True)`, `highlight_in_pdf`, `find_text_in_pdf`.
 - Diagnose `debug.inspect` / `inspect_citavi_object`: interner Aufbau von Wissenselementen, Verknüpfungen und PDF-Markierungen (Vorbereitung #2).
-- Start der Bridge per Citavi-Makro (`bridge/macro/StartClaudeBridge.cs`, `install.ps1 -Macro`) für
-  Rechner ohne Administratorrechte. Citavi 6 lädt Add-ons aus dem Benutzerprofil nicht.
+- Start der Bridge per Citavi-Makro (`bridge/macro/StartClaudeBridge.cs`, `install.ps1 -Macro`) für Rechner, auf
+  denen das Add-on nicht im AddOns-Ordner installiert ist. Citavi 6 lädt Add-ons nur aus diesem Ordner.
 
 ### Added
 - Citavi-Add-on `ClaudeCitavi.Bridge`: lokaler HTTP-Server (nur localhost, Token) im Citavi-Prozess
@@ -96,7 +102,7 @@ Erste öffentliche Fassung. Die Entwicklungsgeschichte bis hierher steht in den 
 - Diagnosemethode `debug.describeType` zum Nachschlagen der Citavi-API vor Ort.
 - MCP-Server `citavi-mcp` mit 25 Werkzeugen für Claude, inklusive DOI-Import über Crossref.
 - Installationsskript `scripts/install.ps1` für Windows (Add-on, MCP-Server, Claude-Desktop-Eintrag).
-- Installation ohne `winget` und ohne Administratorrechte für .NET (Firmenrechner).
+- Entwicklungsumgebung auch ohne `winget`: .NET SDK per `dotnet-install.ps1` im Benutzerprofil.
 - Dokumentation: Architektur, ADR 0001, Installation, Bridge-Protokoll, Entwicklung, GitHub-Leitfaden.
 - GitHub: Issue- und PR-Vorlagen, CI (Python-Tests, Compile-Check des Add-ons), Dependabot.
 - Cloud-Projekte und mehrere offene Projekte: `projects.list`, Projektauswahl pro Anfrage,

@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
   One-time installation of ClaudeCitavi by IT (admin rights), fully offline from the release package.
 
@@ -58,10 +58,10 @@ if (-not $SkipMcp) {
     # Every package is checked against the SHA256 in wheelhouse\requirements.txt.
     & "$venv\Scripts\python.exe" -m pip install --no-index --find-links (Join-Path $here 'wheelhouse') --require-hashes -r (Join-Path $here 'wheelhouse\requirements.txt') --quiet
     if ($LASTEXITCODE -ne 0) { throw "Installation des MCP-Servers fehlgeschlagen." }
-    Copy-Item -Force (Join-Path $here 'nutzer-einrichten.ps1') $TargetDir
+    Copy-Item -Force (Join-Path $here 'einrichten.py'), (Join-Path $here 'Claude-verbinden.cmd') $TargetDir
     Write-Host "MCP-Server installiert: $venv\Scripts\citavi-mcp.exe"
 }
 
 Write-Host ""
-Write-Host "Fertig. Jede Nutzerin und jeder Nutzer verbindet Claude einmal selbst (ohne Adminrechte):"
-Write-Host "  powershell -ExecutionPolicy Bypass -File `"$TargetDir\nutzer-einrichten.ps1`""
+Write-Host "Fertig. Jede Nutzerin und jeder Nutzer verbindet Claude danach einmal selbst per Doppelklick auf:"
+Write-Host "  $TargetDir\Claude-verbinden.cmd"
