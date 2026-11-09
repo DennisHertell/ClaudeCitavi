@@ -4,7 +4,7 @@
   then headless Chrome or Edge (HTML to PDF).
 
 .EXAMPLE
-  powershell -ExecutionPolicy Bypass -File scripts\md2pdf.ps1 -In docs\IT-INSTALLATION.md -Out D:\IT-Anleitung.pdf -Meta "Version 0.4.1"
+  powershell -ExecutionPolicy Bypass -File scripts\md2pdf.ps1 -In docs\IT-INSTALLATION.md -Out D:\IT-Anleitung.pdf -Meta "Version 0.4.2"
 #>
 [CmdletBinding()]
 param(
