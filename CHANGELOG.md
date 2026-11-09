@@ -6,6 +6,10 @@ Alle nennenswerten Änderungen an diesem Projekt. Format nach
 
 ## [Unreleased]
 
+### Changed
+- Makro-Anleitung: Der Makro-Editor darf nach dem Start geschlossen werden. Die Verbindung läuft bis zum Beenden von
+  Citavi weiter (live geprüft, #7).
+
 ## [0.4.1] - 2026-11-09
 
 ### Changed
