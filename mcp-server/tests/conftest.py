@@ -74,6 +74,9 @@ class FakeBridge:
         self.opened.append(p["name"])
         return {"name": p["name"], "opened": True, "alreadyOpen": False}
 
+    def m_projects_create(self, p):
+        return {"name": p["name"], "created": True, "type": p.get("type", "cloud")}
+
     def m_attachments_list(self, p):
         items = [a for a in self.attachments if not p.get("onlyMissing") or not a["availableLocally"]]
         return {"projectIsCloud": True, "total": len(items), "items": items}

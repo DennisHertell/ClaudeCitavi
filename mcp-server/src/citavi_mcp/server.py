@@ -1324,9 +1324,22 @@ def delete_unused_entries(kind: ListKind, entry_ids: list[str] | None = None, co
 
 
 @mcp.tool(annotations=WRITE)
-def create_project(name: str, project_type: Literal["cloud", "local"] = "cloud") -> dict:
+def create_project(
+    name: str,
+    project_type: Literal["cloud", "local"] = "cloud",
+    folder: Annotated[
+        str | None,
+        Field(
+            description="Nur bei local: übergeordneter Ordner. "
+            "Standard ist Citavis Projektordner (Dokumente\\Citavi 6\\Projects)."
+        ),
+    ] = None,
+) -> dict:
     """Legt ein neues Citavi-Projekt an (Standard: Cloud-Projekt) und öffnet es. Nur nach Rückfrage beim Nutzer."""
-    result = _call("projects.create", timeout=240, name=name, type=project_type)
+    params = {"name": name, "type": project_type}
+    if folder:
+        params["folder"] = folder
+    result = _call("projects.create", timeout=240, **params)
     bridge.project = name
     return {**(result or {}), "selectedProject": name}
 

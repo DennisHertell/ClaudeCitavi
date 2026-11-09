@@ -6,6 +6,9 @@ Alle nennenswerten Änderungen an diesem Projekt. Format nach
 
 ## [Unreleased]
 
+### Fixed
+- Lokale Projekte (SQLite) lassen sich anlegen: `projects.create` mit `type=local` setzt jetzt die Projektdatei in Citavis Projektordner (vorher `ArgumentNullException: options.ConnectionString`). Optional `folder`. Lokale Projekte live geprüft: Titel, PDF-Anhang, Kategorien, PDF-Text, Wissenselement mit Markierung, Zitierprüfung, Neustart (#5).
+
 ## [0.4.1] - 2026-11-09
 
 ### Changed
