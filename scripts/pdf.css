@@ -1,0 +1,26 @@
+@page { size: A4; margin: 22mm 20mm 20mm 20mm; }
+@page { @bottom-right { content: counter(page); } }
+html { font-family: "Segoe UI", "Calibri", Arial, sans-serif; font-size: 10pt; color: #1d2733; line-height: 1.45; }
+body { margin: 0; }
+h1 { font-size: 20pt; font-weight: 600; color: #00549f; margin: 0 0 4mm 0; padding-bottom: 3mm; border-bottom: 1.5pt solid #00549f; }
+h2 { font-size: 12.5pt; font-weight: 600; color: #00549f; margin: 7mm 0 2mm 0; page-break-after: avoid; }
+h3 { font-size: 11pt; font-weight: 600; margin: 5mm 0 1.5mm 0; page-break-after: avoid; }
+p { margin: 0 0 2.5mm 0; }
+ul, ol { margin: 0 0 3mm 0; padding-left: 6mm; }
+li { margin-bottom: 1.2mm; }
+code { font-family: "Cascadia Mono", Consolas, monospace; font-size: 8.8pt; background: #eef2f6; padding: 0.2mm 1mm; border-radius: 1mm; }
+pre { background: #eef2f6; border-left: 2pt solid #00549f; padding: 2.5mm 3.5mm; margin: 1mm 0 3mm 0; white-space: pre-wrap; word-break: break-all; page-break-inside: avoid; }
+pre code { background: none; padding: 0; font-size: 8.6pt; }
+table { border-collapse: collapse; width: 100%; margin: 1mm 0 4mm 0; font-size: 9pt; page-break-inside: avoid; }
+th { background: #00549f; color: #fff; font-weight: 600; text-align: left; padding: 1.6mm 2mm; }
+td { border-bottom: 0.5pt solid #c7d1dc; padding: 1.6mm 2mm; vertical-align: top; }
+td code { word-break: break-all; }
+strong { font-weight: 600; }
+a { color: #00549f; text-decoration: none; }
+.meta { color: #5b6b7c; font-size: 8.5pt; margin-bottom: 6mm; }
+img { max-width: 100%; max-height: 92mm; width: auto; display: block; margin: 2mm 0 1mm 0; border: 0.5pt solid #c7d1dc; border-radius: 1.5mm; box-shadow: 0 0.6mm 2mm rgba(0,0,0,0.12); }
+figure { margin: 2mm 0 5mm 0; page-break-inside: avoid; }
+figcaption { font-size: 8.5pt; color: #5b6b7c; margin-top: 1.5mm; }
+.hinweis { background: #fff6e5; border-left: 2.5pt solid #e5a00d; padding: 2.5mm 3.5mm; margin: 2mm 0 4mm 0; border-radius: 1mm; page-break-inside: avoid; }
+.hinweis p { margin: 0; }
+h3 { color: #1d2733; }

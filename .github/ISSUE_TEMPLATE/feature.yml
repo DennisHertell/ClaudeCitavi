@@ -1,0 +1,21 @@
+name: Funktion wünschen
+description: Idee für eine neue Fähigkeit oder Verbesserung.
+labels: [enhancement]
+body:
+  - type: textarea
+    id: goal
+    attributes:
+      label: Was möchtest du erreichen?
+      description: Beschreibe die Aufgabe so, wie du sie in Citavi per Klick erledigen würdest.
+    validations:
+      required: true
+  - type: textarea
+    id: example
+    attributes:
+      label: Beispiel
+      description: Wie würdest du Claude darum bitten?
+      placeholder: '"Lege zu jedem Titel in Kategorie X eine Zusammenfassung an ..."'
+  - type: textarea
+    id: notes
+    attributes:
+      label: Weitere Hinweise

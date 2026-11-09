@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+dist/
+build/
+
+# .NET
+bin/
+obj/
+bridge/out/
+bridge/ci-stubs/bin-stub/
+bridge/ci-stubs/out/
+*.user
+.vs/
+
+# OS / editors
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# Local secrets / config
+bridge.json
+.env
+
+# Unedited screenshots (contain local names); only the annotated ones in img/ are published
+docs/anleitung-makro/raw/

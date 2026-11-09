@@ -1,0 +1,31 @@
+name: Fehler melden
+description: Etwas funktioniert nicht wie erwartet.
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: Was ist passiert?
+      description: Was hast du (oder Claude) gemacht, und was kam heraus?
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Was hättest du erwartet?
+  - type: textarea
+    id: output
+    attributes:
+      label: Fehlermeldung / Warnungen
+      description: Antwort von Claude oder Inhalt von %APPDATA%\ClaudeCitavi\bridge.log (letzte Zeilen).
+      render: text
+  - type: input
+    id: citavi
+    attributes:
+      label: Citavi-Version
+      placeholder: z. B. 6.19 (Hilfe > Über Citavi)
+  - type: dropdown
+    id: part
+    attributes:
+      label: Betroffener Teil
+      options: [Weiß nicht, Bridge-Add-on (Citavi), MCP-Server (Claude), Installation]

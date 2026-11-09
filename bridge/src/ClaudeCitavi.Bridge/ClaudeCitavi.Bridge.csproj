@@ -1,0 +1,66 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    ClaudeCitavi Bridge: Citavi add-on that exposes the open Citavi project
+    to a local MCP server via HTTP on 127.0.0.1.
+
+    Build (Windows, .NET SDK installed):
+      dotnet build -c Release
+    or with a non-default Citavi folder:
+      dotnet build -c Release -p:CitaviDir="D:\Programme\Citavi 6\bin"
+  -->
+
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <AssemblyName>ClaudeCitavi.Bridge</AssemblyName>
+    <RootNamespace>ClaudeCitavi.Bridge</RootNamespace>
+    <Version>0.4.0</Version>
+    <UseWindowsForms>true</UseWindowsForms>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+    <Nullable>disable</Nullable>
+  </PropertyGroup>
+
+  <!-- Citavi installation folder. Citavi 6 default first, Citavi 7 as fallback. -->
+  <PropertyGroup Condition="'$(CitaviDir)' == ''">
+    <CitaviDir Condition="Exists('$(MSBuildProgramFiles32)\Citavi 6\bin\Citavi.exe')">$(MSBuildProgramFiles32)\Citavi 6\bin</CitaviDir>
+    <CitaviDir Condition="'$(CitaviDir)' == '' And Exists('$(ProgramW6432)\Citavi 7\bin\Citavi.exe')">$(ProgramW6432)\Citavi 7\bin</CitaviDir>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Drawing" />
+  </ItemGroup>
+
+  <!-- Citavi assemblies are referenced from the local installation and never copied (Private=false). -->
+  <ItemGroup>
+    <Reference Include="Citavi">
+      <HintPath>$(CitaviDir)\Citavi.exe</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="SwissAcademic">
+      <HintPath>$(CitaviDir)\SwissAcademic.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="SwissAcademic.Citavi">
+      <HintPath>$(CitaviDir)\SwissAcademic.Citavi.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="SwissAcademic.Controls">
+      <HintPath>$(CitaviDir)\SwissAcademic.Controls.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>$(CitaviDir)\Newtonsoft.Json.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+  <Target Name="CheckCitaviDir" BeforeTargets="ResolveAssemblyReferences">
+    <Error Condition="'$(CitaviDir)' == '' Or !Exists('$(CitaviDir)\Citavi.exe')"
+           Text="Citavi not found. Pass the bin folder explicitly: dotnet build -p:CitaviDir=&quot;C:\...\Citavi 6\bin&quot;" />
+  </Target>
+
+</Project>
