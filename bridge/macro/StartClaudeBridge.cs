@@ -18,7 +18,7 @@ public static class CitaviMacro
 
         if (!File.Exists(dll))
         {
-            MessageBox.Show("Nicht gefunden: " + dll + "\n\nBitte zuerst scripts\\install.ps1 -Macro ausführen.", "ClaudeCitavi");
+            MessageBox.Show("Nicht gefunden: " + dll + "\n\nBitte zuerst Einrichten aus dem Paket ClaudeCitavi-Makro ausführen.", "ClaudeCitavi");
             return;
         }
 
